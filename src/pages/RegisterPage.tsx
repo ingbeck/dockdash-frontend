@@ -1,40 +1,46 @@
 import axios from "axios";
-import "./Login.css"
 import { FormEvent, useState } from "react";
+//import { useNavigate } from "react-router-dom";
 
-export default function App () {
+export default function RegisterPage () {
 
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
-    function login(){
-        axios.post("/api/users/login", {}, {
-            auth:{
-                username: username,
-                password: password
-            }
+    //const navigate = useNavigate();
+
+    function register(){
+        axios.post("api/users/register", {
+            "username": username,
+            "password": password
         })
-        .then(() => console.log("logged in"))
-        .catch((e) => console.log(e));
+        .then(() => {
+            setUsername("");
+            setPassword("");
+        })
+        .catch((e) => {
+            setUsername("");
+            setPassword("");
+            console.log(e);
+        })
     }
 
     function handleSubmit(e: FormEvent<HTMLFormElement>){
         e.preventDefault();
-        login();
+        register();
     }
 
     return (
+        <>
+        <h1>Registrierung</h1>
         <form onSubmit={handleSubmit}>
-        <h1>Dock Dash</h1>
-            <div className={"login-wrapper"}>
+            <div className={"form-input-wrapper"}>
                 <input placeholder={"Username"} value={username} onChange={(e) => setUsername(e.target.value)}/>
                 <input placeholder={"Passswort"} type={"password"} value={password} onChange={(e) => setPassword(e.target.value)}/>
             </div>
-            <div className="card">
-                <button>
-                    Login
-                </button>
-            </div>
+            <button>Speichern</button>
         </form>
+        </>
+
     );
 }

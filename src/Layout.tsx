@@ -4,7 +4,7 @@ type LayoutProps = {
     children : React.ReactNode
 }
 
-export default function App (props: Readonly<LayoutProps>) {
+export default function Layout (props: Readonly<LayoutProps>) {
 
   return (
     <>
