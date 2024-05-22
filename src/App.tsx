@@ -1,17 +1,16 @@
-import { useState } from 'react'
+
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
+import Layout from './Layout'
+import Login from './pages/Login'
 
 export default function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <h1>Dock Dash</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-    </>
+    <Layout>
+      <Routes>
+        <Route path={"/"} element={<Login/>}/>
+      </Routes>
+    </Layout>
   )
 }
